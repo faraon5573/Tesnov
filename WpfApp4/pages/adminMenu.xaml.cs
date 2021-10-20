@@ -46,5 +46,10 @@ namespace WpfApp4.pages
         {
             LoadPages.MainFrame.GoBack();
         }
+
+        private void btnProsm_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPages.MainFrame.Navigate(new PageUserList());
+        }
     }
 }

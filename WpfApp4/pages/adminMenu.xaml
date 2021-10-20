@@ -25,6 +25,7 @@
                 
                 <Button x:Name="btnSaveCahanges" Content="Сохранить изменения"  Click="btnSaveCahanges_Click" Height="30"/>
                 <Button Name="btnDeleteUser" Content="Удалить выбранного пользователя" Click="btnDeleteUser_Click" Height="30"/>
+                <Button Name="btnProsm" Content="Просмотреть в другом виде, с пользователями с полными данными" IsCancel="True" Click="btnProsm_Click" Height="30"/>
                 <Button Name="btnBack" Content="Назад" IsCancel="True" Click="btnBack_Click" Height="30"/>
            
         </StackPanel>
