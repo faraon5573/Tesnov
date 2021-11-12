@@ -10,19 +10,25 @@
 
     <Page.Resources>
         <DataTemplate x:Key="DT1">
+            <!--Шаблон для вывода информации о пользователе-->
             <StackPanel>
                 <GroupBox Header="имя">
                     <TextBlock Text="{Binding name}"/>
                 </GroupBox>
                 <GroupBox Header=" дата рождения">
                     <TextBlock Text="{Binding dr, StringFormat={}{0:dd.MM.yyyy}}"/>
+                    <!--указание формата вывода даты-->
                 </GroupBox>
                 <GroupBox Header=" пол">
                     <TextBlock Text="{Binding genders.gender}"/>
+                    <!--переход к сущности genders, т.к. в users содержится только id пола-->
                 </GroupBox>
                 <GroupBox Header="качества личности">
+                    <!--тут будет вложенный список, т.к. связи многие ко многим-->
                     <ListBox Name="lbTraits" Loaded="lbTraits_Loaded" Uid="{Binding id}"/>
+                    <!--loaded - событие, которое происходит при создании элемента списка из шаблона-->
                 </GroupBox>
+                <Image x:Name="UserImage" Loaded="UserImage_Loaded" Uid="{Binding id}"/>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
@@ -38,26 +44,26 @@
             <GroupBox Header="до">
                 <TextBox Name="txtDO" Width="50"/>
             </GroupBox>
+            <Button Name="btnGo" Content="Вывести данные" Click="Filter" Width="100" Margin="5"/>
             <GroupBox Header="выберите пол">
                 <ComboBox x:Name="lbGenderFilter" SelectionChanged="Filter"/>
             </GroupBox>
             <GroupBox Header="часть имени">
                 <TextBox Name="txtNameFilter" TextChanged="Filter"/>
             </GroupBox>
-            <Button Name="btnGo" Content="Вывести" Click="Filter" Width="50" Margin="5"/>
-            <Button Name="btnReset" Content="Сброс" Click="btnReset_Click" Width="50" Margin="5"/>
             <GroupBox Header="сколько на странице">
                 <TextBox Name="txtPageCount" TextChanged="txtPageCount_TextChanged"/>
             </GroupBox>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Name="txtPrev" Uid="prev" Text=" Пред. " MouseDown="GoPage_MouseDown"/>
-                <TextBlock Name="txt1" Uid="1" Text=" 1 " MouseDown="GoPage_MouseDown"/>
-                <TextBlock Name="txt2" Uid="2" Text=" 2 " MouseDown="GoPage_MouseDown"/>
-                <TextBlock Name="txt3" Uid="3" Text=" 3 " MouseDown="GoPage_MouseDown"/>
-                <TextBlock Name="txt4" Uid="4" Text=" 4 " MouseDown="GoPage_MouseDown"/>
-                <TextBlock Name="txt5" Uid="5" Text=" 5 " MouseDown="GoPage_MouseDown"/>
+                <TextBlock Name="txt1" Uid="1" Text="{Binding  Path = NPage[0], StringFormat={}{0,3}}" Visibility="{Binding Visible[0]}" FontWeight="{Binding Bold[0]}" MouseDown="GoPage_MouseDown"/>
+                <TextBlock Name="txt2" Uid="2" Text="{Binding  Path = NPage[1], StringFormat={}{0,3}}" Visibility="{Binding Visible[1]}" FontWeight="{Binding Bold[1]}" MouseDown="GoPage_MouseDown"/>
+                <TextBlock Name="txt3" Uid="3" Text="{Binding  Path = NPage[2], StringFormat={}{0,3}}" Visibility="{Binding Visible[2]}" FontWeight="{Binding Bold[2]}" MouseDown="GoPage_MouseDown"/>
+                <TextBlock Name="txt4" Uid="4" Text="{Binding  Path = NPage[3], StringFormat={}{0,3}}" Visibility="{Binding Visible[3]}" FontWeight="{Binding Bold[3]}" MouseDown="GoPage_MouseDown"/>
+                <TextBlock Name="txt5" Uid="5" Text="{Binding  Path = NPage[4], StringFormat={}{0,3}}" Visibility="{Binding Visible[4]}" FontWeight="{Binding Bold[4]}" MouseDown="GoPage_MouseDown"/>
                 <TextBlock Name="txtNext" Uid="next" Text=" След." MouseDown="GoPage_MouseDown"/>
             </StackPanel>
+            <Button Name="btnReset" Content="Сброс данных" Click="btnReset_Click" Width="90" Margin="5"/>
             <TextBlock Name="txtCurrentPage"/>
         </StackPanel>
         <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Grid.Row="1"/>
