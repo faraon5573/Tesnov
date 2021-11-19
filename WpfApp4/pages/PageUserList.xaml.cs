@@ -165,7 +165,7 @@ namespace WpfApp4.pages
                 System.Drawing.Image UserImage = System.Drawing.Image.FromFile(openFileDialog.FileName);
                 ImageConverter IC = new ImageConverter();
                 byte[] ByteArr = (byte[])IC.ConvertTo(UserImage, typeof(byte[]));
-                usersimage UI = new usersimage() { id_user = ind, image = ByteArr };
+                usersimage UI = new usersimage() { id_user = ind, image = ByteArr};
                 BaseConnect.BaseModel.usersimage.Add(UI);
                 BaseConnect.BaseModel.SaveChanges();
                 MessageBox.Show("Картинка пользователя добавлена в базу");
