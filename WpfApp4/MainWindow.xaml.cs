@@ -25,7 +25,7 @@ namespace WpfApp4
             InitializeComponent();            
             frmMain.Navigate(new login());
             LoadPages.MainFrame = frmMain;
-            BaseConnect.BaseModel= new Entities();
+            BaseConnect.BaseModel= new Entities1();
         }
 
         private void frmMain_Navigated(object sender, NavigationEventArgs e)

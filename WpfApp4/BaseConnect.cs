@@ -8,6 +8,6 @@ namespace WpfApp4
 {
     internal class BaseConnect
     {
-        public static Entities BaseModel;        
+        public static Entities1 BaseModel;        
     }
 }

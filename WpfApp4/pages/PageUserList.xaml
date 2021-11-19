@@ -12,46 +12,59 @@
         <DataTemplate x:Key="DT1">
             <!--Шаблон для вывода информации о пользователе-->
             <StackPanel>
-                <GroupBox Header="имя">
+                <GroupBox Header="Имя">
                     <TextBlock Text="{Binding name}"/>
                 </GroupBox>
-                <GroupBox Header=" дата рождения">
+                <GroupBox Header=" Дата рождения">
                     <TextBlock Text="{Binding dr, StringFormat={}{0:dd.MM.yyyy}}"/>
                     <!--указание формата вывода даты-->
                 </GroupBox>
-                <GroupBox Header=" пол">
+                <GroupBox Header=" Пол">
                     <TextBlock Text="{Binding genders.gender}"/>
                     <!--переход к сущности genders, т.к. в users содержится только id пола-->
                 </GroupBox>
-                <GroupBox Header="качества личности">
+                <GroupBox Header="Качества личности">
                     <!--тут будет вложенный список, т.к. связи многие ко многим-->
                     <ListBox Name="lbTraits" Loaded="lbTraits_Loaded" Uid="{Binding id}"/>
                     <!--loaded - событие, которое происходит при создании элемента списка из шаблона-->
                 </GroupBox>
                 <Image x:Name="UserImage" Loaded="UserImage_Loaded" Uid="{Binding id}"/>
+                <Button Height="50" x:Name="BtmAddImage" Content="Загрузить/изменить изображение пользователя" Click="BtmAddImage_Click" Uid="{Binding id}"/>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="55"/>
             <RowDefinition Height="397*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0"  Orientation="Horizontal">
-            <GroupBox Header="от">
+            <GroupBox Header="От">
                 <TextBox Name="txtOT" Width="50"/>
             </GroupBox>
-            <GroupBox Header="до">
+            <GroupBox Header="До">
                 <TextBox Name="txtDO" Width="50"/>
             </GroupBox>
             <Button Name="btnGo" Content="Вывести данные" Click="Filter" Width="100" Margin="5"/>
-            <GroupBox Header="выберите пол">
+            <GroupBox Header="Выберите пол">
                 <ComboBox x:Name="lbGenderFilter" SelectionChanged="Filter"/>
             </GroupBox>
-            <GroupBox Header="часть имени">
+            <GroupBox Header="Часть имени">
                 <TextBox Name="txtNameFilter" TextChanged="Filter"/>
             </GroupBox>
-            <GroupBox Header="сколько на странице">
+            <GroupBox Header="Сортировка">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel>
+                        <RadioButton Content ="по имени" Click="Sort_Click" Uid="name"/>
+                        <RadioButton Content ="по дате рождения" Click="Sort_Click" Uid="DR"/>
+                    </StackPanel>
+                    <StackPanel>
+                        <RadioButton Content ="по возрастанию" Click="Sort_Click"/>
+                        <RadioButton x:Name="RBReverse" Content ="по убыванию" Click="Sort_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="Сколько на странице">
                 <TextBox Name="txtPageCount" TextChanged="txtPageCount_TextChanged"/>
             </GroupBox>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -66,6 +79,6 @@
             <Button Name="btnReset" Content="Сброс данных" Click="btnReset_Click" Width="90" Margin="5"/>
             <TextBlock Name="txtCurrentPage"/>
         </StackPanel>
-        <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Grid.Row="1"/>
+        <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Grid.Row="1" ScrollViewer.CanContentScroll="False"/>
     </Grid>
 </Page>

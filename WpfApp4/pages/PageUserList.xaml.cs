@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +15,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ClassLibrary1;
 
 namespace WpfApp4.pages
 {
@@ -29,7 +31,6 @@ namespace WpfApp4.pages
             InitializeComponent();
             users = BaseConnect.BaseModel.users.ToList();
             lbUsersList.ItemsSource = users;
-            //заполнение списка с фильтром по полу
             lbGenderFilter.ItemsSource = BaseConnect.BaseModel.genders.ToList();
             lbGenderFilter.SelectedValuePath = "id";
             lbGenderFilter.DisplayMemberPath = "gender";
@@ -77,8 +78,6 @@ namespace WpfApp4.pages
             if (txtNameFilter.Text != "")
             {
                 lu1 = lu1.Where(x => x.name.Contains(txtNameFilter.Text)).ToList();
-                lbUsersList.ItemsSource = users;
-
             }
 
             lbUsersList.ItemsSource = lu1;
@@ -118,24 +117,78 @@ namespace WpfApp4.pages
         }
         private void UserImage_Loaded(object sender, RoutedEventArgs e)
         {
-            Image IMG = sender as Image;
+            System.Windows.Controls.Image IMG = sender as System.Windows.Controls.Image;
             int ind = Convert.ToInt32(IMG.Uid);
             users U = BaseConnect.BaseModel.users.FirstOrDefault(x => x.id == ind);
-            BitmapImage BI;
-            switch (U.gender)
+            usersimage UI = BaseConnect.BaseModel.usersimage.FirstOrDefault(x => x.id_user == ind);
+            BitmapImage BI = new BitmapImage();
+            if (UI != null)
             {
-                case 1:
-                    BI = new BitmapImage(new Uri(@"/images/male.jpg", UriKind.Relative));
+                if (UI.path != null)
+                {
+                    BI = new BitmapImage(new Uri(UI.path, UriKind.Relative));
+                }
+                else
+                {
+                    BI.BeginInit();
+                    BI.StreamSource = new MemoryStream(UI.image);
+                    BI.EndInit();
+                }
+            }
+            else
+            {
+                switch (U.gender)
+                {
+                    case 1:
+                        BI = new BitmapImage(new Uri(@"/images/male.jpg", UriKind.Relative));
+                        break;
+                    case 2:
+                        BI = new BitmapImage(new Uri(@"/images/female.jpg", UriKind.Relative));
+                        break;
+                    default:
+                        BI = new BitmapImage(new Uri(@"/images/other.jpg", UriKind.Relative));
+                        break;
+                }
+            }
+            IMG.Source = BI;
+        }
+        private void BtmAddImage_Click(object sender, RoutedEventArgs e)
+        {
+            Button BTN = (Button)sender;
+            int ind = Convert.ToInt32(BTN.Uid);
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.DefaultExt = ".jpg";
+            openFileDialog.Filter = "Изображения |*.jpg;*.png";
+            var result = openFileDialog.ShowDialog();
+            if (result == true)
+            {
+                System.Drawing.Image UserImage = System.Drawing.Image.FromFile(openFileDialog.FileName);
+                ImageConverter IC = new ImageConverter();
+                byte[] ByteArr = (byte[])IC.ConvertTo(UserImage, typeof(byte[]));
+                usersimage UI = new usersimage() { id_user = ind, image = ByteArr };
+                BaseConnect.BaseModel.usersimage.Add(UI);
+                BaseConnect.BaseModel.SaveChanges();
+                MessageBox.Show("Картинка пользователя добавлена в базу");
+            }
+            else
+            {
+                MessageBox.Show("Операция выбора изображения отменена");
+            }
+        }
+        private void Sort_Click(object sender, RoutedEventArgs e)
+        {
+            RadioButton RB = (RadioButton)sender;
+            switch (RB.Uid)
+            {
+                case "name":
+                    lu1 = lu1.OrderBy(x => x.name).ToList();
                     break;
-                case 2:
-                    BI = new BitmapImage(new Uri(@"/images/female.jpg", UriKind.Relative));
-                    break;
-                default:
-                    BI = new BitmapImage(new Uri(@"/images/other.jpg", UriKind.Relative));
+                case "DR":
+                    lu1 = lu1.OrderBy(x => x.dr).ToList();
                     break;
             }
-
-            IMG.Source = BI;//помещаем картинку в image
+            if (RBReverse.IsChecked == true) lu1.Reverse();
+            lbUsersList.ItemsSource = lu1;
         }
     }
 }

@@ -13,10 +13,10 @@ namespace WpfApp4
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class Entities1 : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public Entities1()
+            : base("name=Entities1")
         {
         }
     
@@ -28,8 +28,10 @@ namespace WpfApp4
         public virtual DbSet<auth> auth { get; set; }
         public virtual DbSet<genders> genders { get; set; }
         public virtual DbSet<roles> roles { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<traits> traits { get; set; }
         public virtual DbSet<users> users { get; set; }
         public virtual DbSet<users_to_traits> users_to_traits { get; set; }
+        public virtual DbSet<usersimage> usersimage { get; set; }
     }
 }

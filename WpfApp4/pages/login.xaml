@@ -9,7 +9,7 @@
       Title="login">
 
     <Grid>
-        <GroupBox Header="Введите ренистрационные данные">
+        <GroupBox Header="Введите регистрационные данные">
             <StackPanel>
                 <GroupBox Header="Введите логин">
                     <TextBox x:Name="txtLogin"/>
