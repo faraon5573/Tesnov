@@ -91,6 +91,9 @@
     <Compile Include="pages\adminMenu.xaml.cs">
       <DependentUpon>adminMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="pages\PageImage.xaml.cs">
+      <DependentUpon>PageImage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="pages\PageUserList.xaml.cs">
       <DependentUpon>PageUserList.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="pages\login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="pages\PageImage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

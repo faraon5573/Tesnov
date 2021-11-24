@@ -190,5 +190,12 @@ namespace WpfApp4.pages
             if (RBReverse.IsChecked == true) lu1.Reverse();
             lbUsersList.ItemsSource = lu1;
         }
+        private void BtmProsmImage_Click(object sender, RoutedEventArgs e)
+        {
+            Button BTN = (Button)sender;
+            int ind = Convert.ToInt32(BTN.Uid);
+            users Ululu = BaseConnect.BaseModel.users.FirstOrDefault(x => x.id == ind);
+            LoadPages.MainFrame.Navigate(new PageImage());
+        }
     }
 }
