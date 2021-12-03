@@ -189,13 +189,14 @@ namespace WpfApp4.pages
             }
             if (RBReverse.IsChecked == true) lu1.Reverse();
             lbUsersList.ItemsSource = lu1;
+            txtPageCount_TextChanged(null, null);
         }
-        private void BtmProsmImage_Click(object sender, RoutedEventArgs e)
+        private void UserImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Button BTN = (Button)sender;
-            int ind = Convert.ToInt32(BTN.Uid);
-            users Ululu = BaseConnect.BaseModel.users.FirstOrDefault(x => x.id == ind);
-            LoadPages.MainFrame.Navigate(new PageImage());
+            System.Windows.Controls.Image im = (System.Windows.Controls.Image)sender;
+            int index = Convert.ToInt32(im.Uid);
+            Gallery G = new Gallery(index);
+            G.Show();
         }
     }
 }

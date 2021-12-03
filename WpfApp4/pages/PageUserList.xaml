@@ -9,50 +9,58 @@
       Title="PageUserList">
 
     <Page.Resources>
+        <Style TargetType="StackPanel" x:Key="SPstyle">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding TooOld}" Value="True">
+                    <Setter Property="Background" Value="Red"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
         <DataTemplate x:Key="DT1">
             <!--Шаблон для вывода информации о пользователе-->
-            <StackPanel>
-                <GroupBox Header="Имя">
+            <StackPanel Style="{StaticResource SPstyle}" >
+                <GroupBox Header="имя" >
                     <TextBlock Text="{Binding name}"/>
                 </GroupBox>
-                <GroupBox Header=" Дата рождения">
+                <GroupBox Header=" дата рождения">
                     <TextBlock Text="{Binding dr, StringFormat={}{0:dd.MM.yyyy}}"/>
                     <!--указание формата вывода даты-->
                 </GroupBox>
-                <GroupBox Header=" Пол">
+                <GroupBox Header=" пол">
                     <TextBlock Text="{Binding genders.gender}"/>
                     <!--переход к сущности genders, т.к. в users содержится только id пола-->
                 </GroupBox>
-                <GroupBox Header="Качества личности">
+                <GroupBox Header="качества личности">
                     <!--тут будет вложенный список, т.к. связи многие ко многим-->
                     <ListBox Name="lbTraits" Loaded="lbTraits_Loaded" Uid="{Binding id}"/>
                     <!--loaded - событие, которое происходит при создании элемента списка из шаблона-->
                 </GroupBox>
-                <Image x:Name="UserImage" Loaded="UserImage_Loaded" Uid="{Binding id}"/>
-                <Button Height="50" x:Name="BtmProsmImage" Content="Просмотреть другие картинки пользователя" Click="BtmProsmImage_Click" Uid="{Binding id}"/>
-                <Button Height="50" x:Name="BtmAddImage" Content="Загрузить/изменить изображение пользователя" Click="BtmAddImage_Click" Uid="{Binding id}"/>
+                <!--Изображение пользователя-->
+                <Image x:Name="UserImage" Loaded="UserImage_Loaded" Uid="{Binding id}" MouseDown="UserImage_MouseDown" Width="300"/>
+                <Button x:Name="BtmAddImage" Content="Загрузить/изменить изображение пользователя" Click="BtmAddImage_Click" Uid="{Binding id}"/>
             </StackPanel>
         </DataTemplate>
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="55"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="397*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0"  Orientation="Horizontal">
-            <GroupBox Header="От">
+            <GroupBox Header="от">
                 <TextBox Name="txtOT" Width="50"/>
             </GroupBox>
-            <GroupBox Header="До">
+            <GroupBox Header="до">
                 <TextBox Name="txtDO" Width="50"/>
             </GroupBox>
             <Button Name="btnGo" Content="Вывести данные" Click="Filter" Width="100" Margin="5"/>
-            <GroupBox Header="Выберите пол">
+            <GroupBox Header="выберите пол">
                 <ComboBox x:Name="lbGenderFilter" SelectionChanged="Filter"/>
             </GroupBox>
-            <GroupBox Header="Часть имени">
+            <GroupBox Header="часть имени">
                 <TextBox Name="txtNameFilter" TextChanged="Filter"/>
-            </GroupBox>
+            </GroupBox>          
+
             <GroupBox Header="Сортировка">
                 <StackPanel Orientation="Horizontal">
                     <StackPanel>
@@ -65,7 +73,9 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="Сколько на странице">
+
+            <Button Name="btnReset" Content="Сброс" Click="btnReset_Click" Width="70" Margin="5"/>
+            <GroupBox Header="сколько на странице">
                 <TextBox Name="txtPageCount" TextChanged="txtPageCount_TextChanged"/>
             </GroupBox>
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -77,7 +87,6 @@
                 <TextBlock Name="txt5" Uid="5" Text="{Binding  Path = NPage[4], StringFormat={}{0,3}}" Visibility="{Binding Visible[4]}" FontWeight="{Binding Bold[4]}" MouseDown="GoPage_MouseDown"/>
                 <TextBlock Name="txtNext" Uid="next" Text=" След." MouseDown="GoPage_MouseDown"/>
             </StackPanel>
-            <Button Name="btnReset" Content="Сброс данных" Click="btnReset_Click" Width="90" Margin="5"/>
             <TextBlock Name="txtCurrentPage"/>
         </StackPanel>
         <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Grid.Row="1" ScrollViewer.CanContentScroll="False"/>
