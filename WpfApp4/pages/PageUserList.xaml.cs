@@ -120,7 +120,7 @@ namespace WpfApp4.pages
             System.Windows.Controls.Image IMG = sender as System.Windows.Controls.Image;
             int ind = Convert.ToInt32(IMG.Uid);
             users U = BaseConnect.BaseModel.users.FirstOrDefault(x => x.id == ind);
-            usersimage UI = BaseConnect.BaseModel.usersimage.FirstOrDefault(x => x.id_user == ind);
+            usersimage UI = BaseConnect.BaseModel.usersimage.FirstOrDefault(x => x.id_user == ind && x.avatar == true);
             BitmapImage BI = new BitmapImage();
             if (UI != null)
             {
