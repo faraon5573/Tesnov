@@ -165,7 +165,7 @@ namespace WpfApp4.pages
                 System.Drawing.Image UserImage = System.Drawing.Image.FromFile(openFileDialog.FileName);
                 ImageConverter IC = new ImageConverter();
                 byte[] ByteArr = (byte[])IC.ConvertTo(UserImage, typeof(byte[]));
-                usersimage UI = new usersimage() { id_user = ind, image = ByteArr};
+                usersimage UI = new usersimage() { id_user = ind, image = ByteArr, avatar = false };
                 BaseConnect.BaseModel.usersimage.Add(UI);
                 BaseConnect.BaseModel.SaveChanges();
                 MessageBox.Show("Картинка пользователя добавлена в базу");
@@ -196,7 +196,27 @@ namespace WpfApp4.pages
             System.Windows.Controls.Image im = (System.Windows.Controls.Image)sender;
             int index = Convert.ToInt32(im.Uid);
             Gallery G = new Gallery(index);
+            G.Closed += form_Closed;
             G.Show();
+
+        }
+        void form_Closed(object sender, EventArgs e)
+        {
+            InitializeComponent();
+            users = BaseConnect.BaseModel.users.ToList();
+            lbUsersList.ItemsSource = users;
+            lbGenderFilter.ItemsSource = BaseConnect.BaseModel.genders.ToList();
+            lbGenderFilter.SelectedValuePath = "id";
+            lbGenderFilter.DisplayMemberPath = "gender";
+            lu1 = users;
+            DataContext = pc;
+            lbUsersList.ItemsSource = users;
+            lbGenderFilter.SelectedIndex = -1;
+            txtNameFilter.Text = "";
+            txtOT.Text = "";
+            txtDO.Text = "";
+            txtPageCount.Text = "";
+            txtCurrentPage.Text = "";
         }
     }
 }
