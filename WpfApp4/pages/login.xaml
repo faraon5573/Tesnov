@@ -17,10 +17,17 @@
                 <GroupBox Header="Введите пароль">
                     <PasswordBox x:Name="txtPassword"/>
                 </GroupBox>
+                <GroupBox Header="Введите код доступа">
+                    <StackPanel Orientation="horizontal">
+                        <TextBox x:Name="txtKey" Width="100" TextChanged="txtKey_TextChanged"/>
+                        <Image x:Name="imgRefresh" IsEnabled="False" Source="/images/refresh.png" Width="20" Height="20" MouseDown="Image_imgRefresh" ></Image>
+                    </StackPanel>
+                </GroupBox>
                 <Button Content="Авторизоваться" Name="btnLogin" Click="btnLogin_Click" IsDefault="True"/>
                 <!--Свойство IsDefault активирует кнопку при нажатии enter, IsCancel - при нажатии Escape-->
                 <Button Content="Зарегистрироваться" Name="btnReg" Click="btnReg_Click"/>
-                
+                <Button Content="Диаграммы" Name="btnDiagr" Click="btnDiagr_Click"/>
+
             </StackPanel>
         </GroupBox>
     </Grid>
