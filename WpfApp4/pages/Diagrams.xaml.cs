@@ -26,7 +26,7 @@ namespace WpfApp4.pages
         }
         private void gridDiagram_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            double maxX = gridDiagram.ActualWidth;//получаем текущую ширину и высоту
+            double maxX = gridDiagram.ActualWidth;
             double maxY = gridDiagram.ActualHeight;
             gridDiagram.Children.Clear();//очишаем графическое поле
             gridDiagram.Children.Add(line(maxX / 20, maxY / 20, maxX / 20, maxY - maxY / 20));//помещаем созданный объект на grid
@@ -38,11 +38,13 @@ namespace WpfApp4.pages
                 L.Stroke = Brushes.Aqua;
                 L.StrokeThickness = maxX / 100;
                 gridDiagram.Children.Add(L);
+
                 TextBlock TB = new TextBlock();
                 TB.Width = maxX / 20 + stepX * i;
                 TB.Height = maxY - maxY / 20 - stepY * i;
                 TB.Text = (maxY - maxY / 20 - stepY * i).ToString();
                 gridDiagram.Children.Add(TB);
+                //gridDiagram.Children.Add(polygon(maxX / 20 * i, (maxY - maxY / 20) * i, maxX / 20 * i + maxX / 40, maxY / 20));
             }
         }
 
@@ -66,16 +68,6 @@ namespace WpfApp4.pages
             P.Points.Add(new Point(x2, y1));
             P.Stroke = Brushes.Aqua;
             return P;
-        }
-
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            LoadPages.MainFrame.GoBack();
-        }
-
-        private void lbUsersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

@@ -7,27 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Diagrams">
-
-    <Page.Resources>
-        <Style TargetType="StackPanel" x:Key="SPstyle">
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding TooOld}" Value="True">
-                    <Setter Property="Background" Value="#4997d0"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-        <DataTemplate x:Key="DT1">
-
-        </DataTemplate>
-    </Page.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="55"/>
-            <RowDefinition Height="397*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0"  >
-            <Button Name="btnBack" Content="Назад" Click="btnBack_Click" />
-        </StackPanel>
-        <ListBox Name="gridDiagram" ItemTemplate="{StaticResource DT1}" Grid.Row="1" ScrollViewer.CanContentScroll="False" SelectionChanged="lbUsersList_SelectionChanged" SizeChanged="gridDiagram_SizeChanged"/>
+    <Grid Name="gridDiagram" SizeChanged="gridDiagram_SizeChanged">
+ 
     </Grid>
 </Page>
