@@ -35,8 +35,7 @@ namespace WpfApp4.pages
             for (int i = 0; i < count; i++)
             {
                 TextBlock TB = new TextBlock();
-                TB.
-                    Width = maxX / 50 + stepX * i;
+                TB.Width = maxX / 50 + stepX * i;
                 TB.Height = maxY - maxY / 20 - stepY * i;
                 TB.Text = (maxY - maxY / 20 - stepY * i).ToString();
                 gridDiagram.Children.Add(TB);
