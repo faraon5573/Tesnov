@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp4.pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="650" d:DesignWidth="800"
       Title="Animations">
 
     <Grid>
@@ -22,7 +22,7 @@
                     <Button Content="Возобновить" x:Name="btnPlay1" Click="btnPlay_Click1"/>
                     <Button Content="Пауза" x:Name="btnPause1" Click="btnPause_Click1"/>
                     <Button Content="Остановка" x:Name="btnStop1" Click="btnStop_Click1"/>
-                    
+
                     <StatusBar Grid.Row="2">
                         <StatusBar.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -39,12 +39,11 @@
                             <TextBlock Name="lblProgressStatus">00:00:00</TextBlock>
                         </StatusBarItem>
                         <StatusBarItem Grid.Column="1" HorizontalContentAlignment="Stretch">
-                            <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged" />
+                            <Slider Name="sliProgress" Thumb.DragStarted="sliProgress_DragStarted"  Thumb.DragCompleted="sliProgress_DragCompleted" ValueChanged="sliProgress_ValueChanged"/>
                         </StatusBarItem>
                     </StatusBar>
                     <Slider x:Name="slVolume"  Maximum="1" Minimum="0" SmallChange=".1" LargeChange=".1" Value="0" ValueChanged="slVolume_ValueChanged"/>
                 </StackPanel>
-
             </StackPanel>
 
 

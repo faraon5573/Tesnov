@@ -34,16 +34,19 @@ namespace WpfApp4.pages
             double count = 20, stepX = (maxX - maxX / 10) / count, stepY = (maxY - maxY / 10) / count;
             for (int i = 0; i < count; i++)
             {
-                Line L = line(maxX / 20 + stepX * i, maxY - maxY / 20, maxX / 20 + stepX * i, maxY - maxY / 20 - stepY * i);
-                L.Stroke = Brushes.Aqua;
-                L.StrokeThickness = maxX / 100;
-                gridDiagram.Children.Add(L);
-
                 TextBlock TB = new TextBlock();
-                TB.Width = maxX / 90 + stepX * i;
-                TB.Height = maxY - maxY - maxY / 90 - stepY * i;
+                TB.
+                    Width = maxX / 50 + stepX * i;
+                TB.Height = maxY - maxY / 20 - stepY * i;
                 TB.Text = (maxY - maxY / 20 - stepY * i).ToString();
                 gridDiagram.Children.Add(TB);
+
+                Line L = line(maxX / 20 + stepX * i, maxY - maxY / 20, maxX / 20 + stepX * i, maxY - maxY / 20 - stepY * i);
+                L.Stroke = Brushes.Aqua;
+                L.StrokeThickness = maxX / 50;
+                gridDiagram.Children.Add(L);
+
+
                 //gridDiagram.Children.Add(polygon(maxX / 20 * i, (maxY - maxY / 20) * i, maxX / 20 * i + maxX / 20, maxY / 20));
             }
         }
