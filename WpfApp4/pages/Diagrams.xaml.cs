@@ -40,11 +40,11 @@ namespace WpfApp4.pages
                 gridDiagram.Children.Add(L);
 
                 TextBlock TB = new TextBlock();
-                TB.Width = maxX / 20 + stepX * i;
-                TB.Height = maxY - maxY / 20 - stepY * i;
+                TB.Width = maxX / 90 + stepX * i;
+                TB.Height = maxY - maxY - maxY / 90 - stepY * i;
                 TB.Text = (maxY - maxY / 20 - stepY * i).ToString();
                 gridDiagram.Children.Add(TB);
-                //gridDiagram.Children.Add(polygon(maxX / 20 * i, (maxY - maxY / 20) * i, maxX / 20 * i + maxX / 40, maxY / 20));
+                //gridDiagram.Children.Add(polygon(maxX / 20 * i, (maxY - maxY / 20) * i, maxX / 20 * i + maxX / 20, maxY / 20));
             }
         }
 

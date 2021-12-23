@@ -115,5 +115,10 @@ namespace WpfApp4.pages
         {
             LoadPages.MainFrame.Navigate(new Diagrams());
         }
+
+        private void btnAnims_Click(object sender, RoutedEventArgs e)
+        {
+            LoadPages.MainFrame.Navigate(new Animations());
+        }
     }
 }

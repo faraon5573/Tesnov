@@ -27,6 +27,7 @@
                 <!--Свойство IsDefault активирует кнопку при нажатии enter, IsCancel - при нажатии Escape-->
                 <Button Content="Зарегистрироваться" Name="btnReg" Click="btnReg_Click"/>
                 <Button Content="Диаграммы" Name="btnDiagr" Click="btnDiagr_Click"/>
+                <Button Content="Анимация" Name="btnAnims" Click="btnAnims_Click"/>
 
             </StackPanel>
         </GroupBox>
