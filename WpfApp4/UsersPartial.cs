@@ -13,6 +13,13 @@ namespace WpfApp4
 
     public partial class auth
     {
-        public bool TooOld1 { get => (users.name == null); }
+        public int TooOld1 { get
+            {
+                if (users.name == null)
+                    return 1;
+                else return 0;
+            }
+        }
+        //public bool TooOld1 { get => (users.gender == null); }
     }
 }
