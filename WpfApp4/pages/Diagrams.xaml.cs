@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -23,9 +24,12 @@ namespace WpfApp4.pages
         public Diagrams()
         {
             InitializeComponent();
+
+
         }
         private void gridDiagram_SizeChanged(object sender, SizeChangedEventArgs e)
         {
+
             double maxX = gridDiagram.ActualWidth;
             double maxY = gridDiagram.ActualHeight;
             gridDiagram.Children.Clear();//очишаем графическое поле
@@ -34,20 +38,28 @@ namespace WpfApp4.pages
             double count = 20, stepX = (maxX - maxX / 10) / count, stepY = (maxY - maxY / 10) / count;
             for (int i = 0; i < count; i++)
             {
-                TextBlock TB = new TextBlock();
-                TB.Width = maxX / 50 + stepX * i;
-                TB.Height = maxY - maxY / 20 - stepY * i;
-                TB.Text = (maxY - maxY / 20 - stepY * i).ToString();
-                gridDiagram.Children.Add(TB);
-
                 Line L = line(maxX / 20 + stepX * i, maxY - maxY / 20, maxX / 20 + stepX * i, maxY - maxY / 20 - stepY * i);
                 L.Stroke = Brushes.Aqua;
-                L.StrokeThickness = maxX / 50;
+                L.StrokeThickness = maxX / 100;
                 gridDiagram.Children.Add(L);
+                TextBlock TB = new TextBlock();
+                TB.Margin = new Thickness(maxX / 20 + stepX * i, maxY - maxY / 20 - stepY * i, 0, 0);
+                TB.Text = (maxY / 20 + stepY * i).ToString("F2");
+                gridDiagram.Children.Add(TB);
 
 
                 //gridDiagram.Children.Add(polygon(maxX / 20 * i, (maxY - maxY / 20) * i, maxX / 20 * i + maxX / 20, maxY / 20));
+
+                ColorAnimation animation;
+                animation = new ColorAnimation();
+                L.Stroke = new SolidColorBrush(Colors.Transparent);
+                animation.To = Colors.Aqua;
+                animation.Duration = new Duration(TimeSpan.FromMilliseconds(900));
+                animation.RepeatBehavior = RepeatBehavior.Forever;
+                animation.AutoReverse = true;
+                L.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, animation);
             }
+
         }
 
         private Line line(double x1, double y1, double x2, double y2)
