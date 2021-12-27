@@ -23,7 +23,7 @@ namespace WpfApp4.pages
         public adminMenu()
         {
             InitializeComponent();
-            dgUsers.ItemsSource = BaseConnect.BaseModel.auth.ToList();
+            //dgUsers.ItemsSource = BaseConnect.BaseModel.auth.ToList();
         }
 
         private void btnSaveCahanges_Click(object sender, RoutedEventArgs e)
