@@ -15,27 +15,23 @@
                 </DataTrigger>
             </Style.Triggers>
         </Style>
-        <DataTemplate x:Key="DT1">
-            <DataGrid x:Name="dgUsers" AutoGenerateColumns="False" IsReadOnly="True" Style="{StaticResource TooOld}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Логин" Binding="{Binding login}"/>
-                    <DataGridTextColumn Header="Пароль" Binding="{Binding password}"/>
-                    <DataGridTextColumn Header="Роль" Binding="{Binding roles.role}"/>
-                    <DataGridTextColumn Header="Имя" Binding="{Binding users.name}"/>
-                    <DataGridTextColumn Header="Дата рождения" Binding="{Binding users.dr, StringFormat={}{0:dd.MM.yyyy}}"/>
-                    <DataGridTextColumn Header="Пол" Binding="{Binding users.genders.gender}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </DataTemplate>
     </Page.Resources>
     <Grid>
-        
         <ScrollViewer>
             <StackPanel>
-                <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Grid.Row="1" ScrollViewer.CanContentScroll="False" SelectionChanged="lbUsersList_SelectionChanged"/>
+                <DataGrid x:Name="dgUsers" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Логин" Binding="{Binding login}"/>
+                        <DataGridTextColumn Header="Пароль" Binding="{Binding password}"/>
+                        <DataGridTextColumn Header="Роль" Binding="{Binding roles.role}"/>
+                        <DataGridTextColumn Header="Имя" Binding="{Binding users.name}"/>
+                        <DataGridTextColumn Header="Дата рождения" Binding="{Binding users.dr, StringFormat={}{0:dd.MM.yyyy}}"/>
+                        <DataGridTextColumn Header="Пол" Binding="{Binding users.genders.gender}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
                 <Button x:Name="btnSaveCahanges" Content="Сохранить изменения"  Click="btnSaveCahanges_Click" Height="30"/>
                 <Button Name="btnDeleteUser" Content="Удалить выбранного пользователя" Click="btnDeleteUser_Click" Height="30"/>
-                <Button Name="btnProsm" Content="Просмотреть в другом виде, с пользователями с полными данными" IsCancel="True" Click="btnProsm_Click" Height="30"/>
                 <Button Name="btnBack" Content="Назад" IsCancel="True" Click="btnBack_Click" Height="30"/>
            
         </StackPanel>
