@@ -218,5 +218,15 @@ namespace WpfApp4.pages
             txtPageCount.Text = "";
             txtCurrentPage.Text = "";
         }
+
+        private void lbUsersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void BtnAdminMenu(object sender, RoutedEventArgs e)
+        {
+            LoadPages.MainFrame.Navigate(new adminMenu());
+        }
     }
 }

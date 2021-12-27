@@ -24,7 +24,6 @@ namespace WpfApp4.pages
         {
             InitializeComponent();
             dgUsers.ItemsSource = BaseConnect.BaseModel.auth.ToList();
-
         }
 
         private void btnSaveCahanges_Click(object sender, RoutedEventArgs e)
@@ -35,11 +34,11 @@ namespace WpfApp4.pages
 
         private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            auth SelectedUser = (auth)dgUsers.SelectedItem;//сохраняем выбранную строку datagrid в отдельный объект
-            BaseConnect.BaseModel.auth.Remove(SelectedUser);//удаляем эту строку из модели
-            BaseConnect.BaseModel.SaveChanges();//синхронизируем изменения с сервером
-            MessageBox.Show("Выбранный пользователь удален");//обратная связь с оператором программы
-            dgUsers.ItemsSource = BaseConnect.BaseModel.auth.ToList();
+            //auth SelectedUser = (auth)dgUsers.SelectedItem;//сохраняем выбранную строку datagrid в отдельный объект
+            //BaseConnect.BaseModel.auth.Remove(SelectedUser);//удаляем эту строку из модели
+            //BaseConnect.BaseModel.SaveChanges();//синхронизируем изменения с сервером
+            //MessageBox.Show("Выбранный пользователь удален");//обратная связь с оператором программы
+            //dgUsers.ItemsSource = BaseConnect.BaseModel.auth.ToList();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -50,6 +49,11 @@ namespace WpfApp4.pages
         private void btnProsm_Click(object sender, RoutedEventArgs e)
         {
             LoadPages.MainFrame.Navigate(new PageUserList());
+        }
+
+        private void lbUsersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }

@@ -92,7 +92,8 @@
                 <TextBlock Name="txtNext" Uid="next" Text=" След." MouseDown="GoPage_MouseDown"/>
             </StackPanel>
             <TextBlock Name="txtCurrentPage"/>
+            <Button Name="btnAdminMenu" Content="Перейти в другое меню" Click="BtnAdminMenu" Width="150" Margin="5"/>
         </StackPanel>
-        <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Grid.Row="1" ScrollViewer.CanContentScroll="False"/>
+        <ListBox Name="lbUsersList" ItemTemplate="{StaticResource DT1}" Grid.Row="1" ScrollViewer.CanContentScroll="False" SelectionChanged="lbUsersList_SelectionChanged"/>
     </Grid>
 </Page>
