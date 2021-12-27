@@ -36,14 +36,14 @@ namespace WpfApp4.pages
             gridDiagram.Children.Add(line(maxX / 20, maxY / 20, maxX / 20, maxY - maxY / 20));//помещаем созданный объект на grid
             gridDiagram.Children.Add(line(maxX / 20, maxY - maxY / 20, maxX - maxX / 20, maxY - maxY / 20));
             double count = 20, stepX = (maxX - maxX / 10) / count, stepY = (maxY - maxY / 10) / count;
-            for (int i = 0; i < count; i++)
+            for (int i = 1; i < count; i++)
             {
                 Line L = line(maxX / 20 + stepX * i, maxY - maxY / 20, maxX / 20 + stepX * i, maxY - maxY / 20 - stepY * i);
                 L.Stroke = Brushes.Aqua;
                 L.StrokeThickness = maxX / 100;
                 gridDiagram.Children.Add(L);
                 TextBlock TB = new TextBlock();
-                TB.Margin = new Thickness(maxX / 20 + stepX * i, maxY - maxY / 20 - stepY * i, 0, 0);
+                TB.Margin = new Thickness(maxX / 25 + stepX * i, maxY - maxY / 15 - stepY * i, 0, 0);
                 TB.Text = (maxY / 20 + stepY * i).ToString("F2");
                 gridDiagram.Children.Add(TB);
 
@@ -54,7 +54,7 @@ namespace WpfApp4.pages
                 animation = new ColorAnimation();
                 L.Stroke = new SolidColorBrush(Colors.Transparent);
                 animation.To = Colors.Aqua;
-                animation.Duration = new Duration(TimeSpan.FromMilliseconds(900));
+                animation.Duration = new Duration(TimeSpan.FromMilliseconds(1000));
                 animation.RepeatBehavior = RepeatBehavior.Forever;
                 animation.AutoReverse = true;
                 L.Stroke.BeginAnimation(SolidColorBrush.ColorProperty, animation);

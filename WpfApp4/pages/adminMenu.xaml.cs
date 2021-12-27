@@ -26,7 +26,6 @@ namespace WpfApp4.pages
             dgUsers.ItemsSource = BaseConnect.BaseModel.auth.ToList();
 
         }
-
         private void btnSaveCahanges_Click(object sender, RoutedEventArgs e)
         {
 
@@ -46,5 +45,6 @@ namespace WpfApp4.pages
         {
             LoadPages.MainFrame.GoBack();
         }
+
     }
 }
