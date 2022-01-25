@@ -9,17 +9,21 @@ namespace WpfApp4
     public partial class users
     {
         public bool TooOld { get => (DateTime.Now - dr).Days >= 365; }
+
     }
 
     public partial class auth
     {
-        public int TooOld1 { get
+        //public bool TooOld1 { get => (users.name.Length == 0); }
+        //public bool TooOld1 { get => (users.name != null); }
+        public int TooOld1
+        {
+            get
             {
-                if (users.name == null)
+                if (users.name.Length == 0)
                     return 1;
                 else return 0;
             }
         }
-        //public bool TooOld1 { get => (users.gender == null); }
     }
 }

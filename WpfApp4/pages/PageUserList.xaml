@@ -10,6 +10,7 @@
 
     <Page.Resources>
         <Style TargetType="StackPanel" x:Key="SPstyle">
+            <Setter Property="Background" Value="Gray"></Setter>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding TooOld}" Value="True">
                     <Setter Property="Background" Value="#4997d0"/>
